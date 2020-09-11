@@ -1,0 +1,61 @@
+{
+  "name": "Create Teams meeting",
+  "integrationType": "custom-rest-actions",
+  "actionType": "custom",
+  "config": {
+    "request": {
+      "requestUrlTemplate": "https://graph.microsoft.com/v1.0/users/${input.user}/calendar/events",
+      "requestType": "POST",
+      "headers": {
+        "authorization": "${authResponse.token_type} ${authResponse.access_token}",
+        "content-type": "application/json"
+      },
+      "requestTemplate": "{\n  \"start\": {\n      \"dateTime\": \"${input.startTime}\",\n      \"timeZone\": \"${input.timeZone}\"\n  },\n  \"end\": {\n      \"dateTime\": \"${input.endTime}\",\n      \"timeZone\": \"${input.timeZone}\"\n  },\n  \"isOnlineMeeting\": true,\n  \"onlineMeetingProvider\": \"teamsForBusiness\"\n}"
+    },
+    "response": {
+      "translationMap": {},
+      "translationMapDefaults": {},
+      "successTemplate": "${rawResult}"
+    }
+  },
+  "contract": {
+    "input": {
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string"
+          },
+          "endTime": {
+            "type": "string"
+          },
+          "timeZone": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "output": {
+      "successSchema": {
+        "type": "object",
+        "properties": {
+          "onlineMeeting": {
+            "type": "object",
+            "properties": {
+              "joinUrl": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "secure": false
+}

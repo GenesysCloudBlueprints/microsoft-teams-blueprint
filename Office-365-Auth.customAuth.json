@@ -1,0 +1,42 @@
+{
+  "name": "Office 365 (Auth)",
+  "integrationType": "custom-rest-actions",
+  "actionType": "customAuth",
+  "config": {
+    "request": {
+      "requestUrlTemplate": "https://login.microsoftonline.com/${credentials.tenant_id}/oauth2/v2.0/token",
+      "requestType": "POST",
+      "headers": {
+        "Authorization": "Basic $encoding.base64(\"${credentials.client_id}:${credentials.client_secret}\")",
+        "Transfer-Encoding": "buffered",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "requestTemplate": "scope=${credentials.scope}&grant_type=${credentials.grant_type}"
+    },
+    "response": {
+      "translationMap": {},
+      "translationMapDefaults": {},
+      "successTemplate": "${rawResult}"
+    }
+  },
+  "contract": {
+    "input": {
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "title": "Auth Input",
+        "description": "No Input Value",
+        "type": "object",
+        "properties": {}
+      }
+    },
+    "output": {
+      "successSchema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": true
+      }
+    }
+  },
+  "secure": false
+}
