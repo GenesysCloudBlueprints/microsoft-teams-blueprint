@@ -8,7 +8,7 @@ This Genesys Blueprint is a guide to setting up Genesys Cloud and Microsoft 365 
 ## Architecture
 Although scheduling a Microsoft Teams meeting from Genesys Cloud requires only a click from the agent, the operation spans multiple platforms at the system level. The public APIs offered by both Genesys Cloud and Microsoft Graph provide this interoperability. The figure below illustrates the API interaction between Genesys Cloud and Microsoft 365.
 
-![Microsoft Teams Integration](/images/bpTeamsSystem.png)
+![Microsoft Teams Integration](/blueprint/images/bpTeamsSystem.png)
 
 ### Solution components:
 * **Genesys Cloud** - The Genesys cloud-based contact center platform. The contact center agent uses the Genesys Cloud user interface.
@@ -43,26 +43,26 @@ You must register your custom application within Azure to enable the Genesys Clo
 
 1. Log in to Azure, navigate to **App Registrations**, and click **New Registration**.
 
-![New Registration for an Azure app](/images/0ACreateNewAzureAppRegistration.png)
+![New Registration for an Azure app](/blueprint/images/0ACreateNewAzureAppRegistration.png)
 
 2. Name the new application and select the preferred supported account type. Any account type works for a single Genesys Cloud organization.
 
-![Register the new Azure app](/images/0BRegisterNewApp.png)
+![Register the new Azure app](/blueprint/images/0BRegisterNewApp.png)
 
 3. View the new application. Copy the Application and Directory IDs for later use.
 
-![Newly registered Azure app](/images/0CNewApp.png)
+![Newly registered Azure app](/blueprint/images/0CNewApp.png)
 
 4. Navigate to **Certificates & Secrets** and click **+ New Client Secret**.
 
-![Create client secret](/images/0DCreateClientSecret.png)
+![Create client secret](/blueprint/images/0DCreateClientSecret.png)
 
 5. Copy the client secret value for later use.
   **Warning:** You cannot view or retrieve the client secret value later.
 
-![Copy and save client secret](/images/0ECopyClientSecret.png)
+![Copy and save client secret](/blueprint/images/0ECopyClientSecret.png)
 6. Confirm that your Genesys Cloud permission is created in Azure.
-![Microsoft Azure Permissions](/images/azurePerm.png)
+![Microsoft Azure Permissions](/blueprint/images/azurePerm.png)
 
 ## Configure Genesys Cloud
 ### Create a Web Services Data Actions Integration
@@ -70,15 +70,15 @@ To enable communication from Genesys Cloud to Microsoft Azure and Microsoft Team
 
 1. Search for and install the **Web Services Data Actions** integration from within Genesys Cloud or from the AppFoundry. For more information, see [About the data actions integrations](https://help.mypurecloud.com/?p=209478 "Opens the Data Actions overview article").
 
-![Web Services Data Actions in Genesys Cloud Integrations Search](/images/1AWebServicesDataActionInstall.png)
+![Web Services Data Actions in Genesys Cloud Integrations Search](/blueprint/images/1AWebServicesDataActionInstall.png)
 
 2. Rename the Web Services Data Action with your desired name and provide a short description.
 
-![Rename and describe the Web Services Data Action](/images/1BRenameWebServicesDataAction.png)
+![Rename and describe the Web Services Data Action](/blueprint/images/1BRenameWebServicesDataAction.png)
 
 3. Navigate to **Configuration > Credentials** and click **Configure**.
 
-![Navigate to Configuration -> Credentials -> Configure](/images/1CConfigurationCredentials.png)
+![Navigate to Configuration -> Credentials -> Configure](/blueprint/images/1CConfigurationCredentials.png)
 
 4. Create the following five fields, provide the desired values, and then click **OK**:
 
@@ -88,21 +88,21 @@ To enable communication from Genesys Cloud to Microsoft Azure and Microsoft Team
 - D: Set the scope to https://graph.microsoft.com/.default.
 - E: Set the grant_type to client_credentials.
 
-![Create fields and values](/images/1DFieldsandValues.png)
+![Create fields and values](/blueprint/images/1DFieldsandValues.png)
 
 5. Import Authentication Data Action
 
 The Authentication data action is imported into another data action.  When a new Web Services Data Actions Integration is created within an org, a Custom Auth data action is also created.
 
-![Custom Auth Data Action associated with Web Services Data Actions Integration](/images/1ECustomAuthDataAction.png)
+![Custom Auth Data Action associated with Web Services Data Actions Integration](/blueprint/images/1ECustomAuthDataAction.png)
 
 6. Open this Custom Auth data action.
 7. The *Office-365-Auth.customAuth.json* file provided in the [microsoft-teams-blueprint repo](https://github.com/MyPureCloud/microsoft-teams-blueprint "Opens the GitHub repo") on GitHub is the supplied Auth Data Action. Download this file and save it to your desktop for import into Genesys Cloud.
 8. Click **Import** and **Import Action** to import the supplied Auth Data Action.
 
-![Open Custom Authentication Data Action](/images/1FOpenCustomAuthDataAction.png)
+![Open Custom Authentication Data Action](/blueprint/images/1FOpenCustomAuthDataAction.png)
 
-![Import Custom Authentication Data Action](/images/1GImportCustomAuthDataAction.png)
+![Import Custom Authentication Data Action](/blueprint/images/1GImportCustomAuthDataAction.png)
 
 9. Return to the Web Services Data Action and confirm it is set to Active.
 
@@ -111,40 +111,40 @@ To enable a Genesys Cloud Data Action to make requests to an org, you must confi
 
 1. Navigate to **Integrations > OAuth** and click **+Add Client**.
 
-![Add an OAuth Client](/images/2AAddOAuthClient.png)
+![Add an OAuth Client](/blueprint/images/2AAddOAuthClient.png)
 
 2. Enter a name for the new OAuth Client and select the Grant Type **Client Credentials**. Click the **Roles** tab and select roles for the OAuth Client.
 
 **Note:** You must select a custom role that includes the permission Messaging > SMS > Send. No default role includes this permission. To create a custom role, see the Custom roles information in the [Roles and permissions overview](https://help.mypurecloud.com/?p=24360 "Opens the Roles and Permission overview article").
 
 
-![Setup OAuth Client](/images/2BOAuthClientSetup.png)
+![Setup OAuth Client](/blueprint/images/2BOAuthClientSetup.png)
 
 
 3. Once role(s) are selected, click the **Client Details** tab of the OAuth Client. Record the Client ID and Client Secret values for later use.
 
-![OAuth Client Credentials](/images/2COAuthClientCredentials.png)
+![OAuth Client Credentials](/blueprint/images/2COAuthClientCredentials.png)
 
 ### Create a Genesys Cloud Data Actions Integration
 This solution uses SMS within Genesys Cloud to send the Microsoft Teams video session URL to the customer. To enable this SMS capability, you need to create a Genesys Cloud Data Action Integration.
 
 1. Search for and install the **Genesys Cloud Data Actions** integration from within Genesys Cloud or from the AppFoundry. For more information, see [About the data actions integrations](https://help.mypurecloud.com/?p=209478 "Opens the Data Actions overview article").
 
-![Genesys Cloud Data Actions in Genesys Cloud Integrations Search](/images/3AGenesysCloudDataActionInstall.png)
+![Genesys Cloud Data Actions in Genesys Cloud Integrations Search](/blueprint/images/3AGenesysCloudDataActionInstall.png)
 
 2. Enter a desired name for the Genesys Cloud Data Action. Click the **Configuration** tab and then the **Credentials** tab.
 
-![Rename Data Action and select Configuration](/images/3BRenameDataAction.png)
+![Rename Data Action and select Configuration](/blueprint/images/3BRenameDataAction.png)
 
 3. Click **Configure** and enter the OAuth **Client ID** and **Client Secret** you created previously. Click **OK**.
 
-![Add OAuth Credentials](/images/3CAddOAuthCredentials.png)
+![Add OAuth Credentials](/blueprint/images/3CAddOAuthCredentials.png)
 
-![Add OAuth Credentials](/images/3DOAuthClientIDandSecret.png)
+![Add OAuth Credentials](/blueprint/images/3DOAuthClientIDandSecret.png)
 
 4. Click **Save**. Navigate to the main Integrations page and confirm the SMS Data Actions integration is set to **Active**.
 
-![Integrations set to Active](/images/3ESetToActive.png)
+![Integrations set to Active](/blueprint/images/3ESetToActive.png)
 
 ### Load Supporting Data Actions
 To enable the **Send SMS** button containing a MS Teams video session link to a customer, you need to import two additional data actions.
@@ -156,12 +156,12 @@ The Create Teams Video Meeting data action uses the authenticated token supplied
 
 2. Navigate to **Integrations > Actions** and click **Import**.
 
-![Import Data Action](/images/4AImportDataActions.png)
+![Import Data Action](/blueprint/images/4AImportDataActions.png)
 
 3. Locate the *Create-Teams-Meeting.custom.json* file. Associate it with the Web Services Data Action you created previously.
 4. Click **Import Action**.
 
-![Import Create Teams Video Meeting Data Action](/images/4BImportCreateTeamsVideoMeetingDataAction.png)
+![Import Create Teams Video Meeting Data Action](/blueprint/images/4BImportCreateTeamsVideoMeetingDataAction.png)
 
 #### Send SMS Data Action
 This data action creates and sends to the customer an SMS message containing the Microsoft Teams video meeting URL. The URL is created by the Create Teams Video Meeting Data Action you configured.
@@ -169,12 +169,12 @@ This data action creates and sends to the customer an SMS message containing the
 1. The *Send-SMS.custom.json* file provided in the [microsoft-teams-blueprint repo](https://github.com/MyPureCloud/microsoft-teams-blueprint "Opens the GitHub repo") on GitHub is the Send SMS Data Action. Download this file and save it to your desktop for import into Genesys Cloud.
 2. Navigate to **Integrations > Actions** and click **Import**.
 
-![Import Data Action](/images/4AImportDataActions.png)
+![Import Data Action](/blueprint/images/4AImportDataActions.png)
 
 3. Locate the *Send-SMS.custom.json* file you downloaded and associate it with the Web Services Data Action created previously.
 4. Click **Import Action**.
 
-![Import Send SMS Data Action](/images/5BImportSendSMSDataAction.png)
+![Import Send SMS Data Action](/blueprint/images/5BImportSendSMSDataAction.png)
 
 ### Load Script
 You need to load a script that references the data actions. This script generates the Escalate to Teams button for agents during an active interaction. It also sends the SMS to the customer containing the Teams video URL.
@@ -183,19 +183,19 @@ You need to load a script that references the data actions. This script generate
 
 2. Navigate to **Admin > Contact Center > Scripts** and click **Import**.
 
-![Import Script](/images/6AImportScript.png)
+![Import Script](/blueprint/images/6AImportScript.png)
 
 2. Select the *Send-SMS-with-Teams-Video-URL.script* file you downloaded.
 
-![Import Send SMS Script](/images/6BImportSendSMSScript.png)
+![Import Send SMS Script](/blueprint/images/6BImportSendSMSScript.png)
 
 3. To publish the script for use in an outbound message, open the imported script. Click the Script menu.
 
-![Open Script Dropdown](/images/6COpenScriptDropdown.png)
+![Open Script Dropdown](/blueprint/images/6COpenScriptDropdown.png)
 
 4. Click **Publish**.
 
-![Publish Script](/images/6DPublishScript.png)
+![Publish Script](/blueprint/images/6DPublishScript.png)
 
 ## Test the deployment
 You can test the Create Teams Video Meeting URL data action within the data action itself.
@@ -205,7 +205,7 @@ You can test the Create Teams Video Meeting URL data action within the data acti
 2. Navigate to **Setup > Test**, insert your user, startTime, endTime, and timeZone, then click **Run Action**.
 **Note:** Enter times in ISO-8601 format.
 
-![Test Create Teams Video Meeting URL Data Action](/images/7TestCreateTeamsVideoMeetingURLDataAction.png)
+![Test Create Teams Video Meeting URL Data Action](/blueprint/images/7TestCreateTeamsVideoMeetingURLDataAction.png)
 
 
 ## Additional resources
