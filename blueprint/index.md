@@ -10,11 +10,11 @@ summary: |
 ---
 
 This Genesys Cloud Developer Blueprint explains how to set up Genesys Cloud and Microsoft 365 for agents to schedule a meeting with customers using Microsoft Teams. The agents can now directly schedule a Microsoft Teams meeting from Genesys Cloud. Genesys Cloud automatically sends an SMS message with the meeting URL to the customer and also opens the Microsoft Teams for the agent. The call is inbound or outbound as long it is in a queue. 
-The meeting scheduling solution from an agent’s point of view is shown in the illustration.
+The following illustration shows the meeting scheduling solution from an agent’s point of view.
 
 ![Microsoft Teams Agent View](images/msteams-workflow.png)
 
-To enable an agent to use Microsoft Teams meeting from Genesys Cloud, the operation spans multiple platforms at the system level. The public APIs offered by both Genesys Cloud and Microsoft Graph provide this interoperability. The API interaction between Genesys Cloud and Microsoft 365 is shown in the illustration.
+To enable an agent to use Microsoft Teams meeting from Genesys Cloud, the operation spans multiple platforms at the system level. Genesys Cloud and Microsoft Graph offer public APIs that provide this interoperability. The following illustration shows the API interaction between Genesys Cloud and Microsoft 365.
 
 ![Microsoft Teams Integration](images/microsoft-teams-architect.png)
 
@@ -64,7 +64,7 @@ To enable an agent to use Microsoft Teams meeting from Genesys Cloud, the operat
   - [Load Script](#load-script)
 
 ### Configure Microsoft Azure custom app
-To enable the Genesys Cloud instance to authenticate and retrieve user information from the Graph API for Microsoft Teams, register your custom application in Azure 
+To enable the Genesys Cloud instance to authenticate and retrieve user information from the Graph API for Microsoft Teams, register your custom application in Azure. 
 
 1. Log in to the Azure portal.
 2. Navigate to **App registrations**, and click **New registration**.
@@ -89,7 +89,7 @@ To enable the Genesys Cloud instance to authenticate and retrieve user informati
 
    ![Copy and save client secret](images/0ECopyClientSecret.png)
 
-7. Confirm that your Genesys Cloud permission is created in Azure.
+7. Check your Genesys Cloud permission created in Azure.
    
    ![Microsoft Azure Permissions](images/azurePerm.png)
 
@@ -122,7 +122,7 @@ To enable communication from Genesys Cloud to Microsoft Azure and Microsoft Team
 
 5. Import authentication data action
 
-   The authentication data action is imported into another data action. When a new web services data actions integration is added within an organization, a Custom Auth data action is also created.
+   The authentication data action is imported into another data action. When you add a new web services data actions integration within an organization, a Custom Auth data action is created automatically.
    Navigate to **Integrations** > **Actions** and open the **Custom Auth** data action.
 
    ![Custom Auth Data Action associated with Web Services Data Actions Integration](images/1ECustomAuthDataAction.png)
@@ -151,7 +151,7 @@ To enable Genesys Cloud data action make requests to an organization, you must c
 
    ![Setup OAuth Client](images/2BOAuthClientSetup.png)
 
-3. After the roles are assigned, click **Save**. Record the Client ID and Client Secret values for later use. 
+3. Click **Save** and record the Client ID and Client Secret values for later use. 
 
    ![OAuth Client Credentials](images/2COAuthClientCredentials.png)
 
@@ -174,7 +174,7 @@ The Microsoft Teams video session URL is sent as an SMS to the customer from Gen
 
    ![Add OAuth Credentials](images/3DOAuthClientIDandSecret.png)
 
-5. Navigate to the main Integrations page and confirm that the SMS data action integration is set to **Active**.
+5. Navigate to the main Integrations page and set the SMS data action integration to **Active**.
 
    ![Integrations set to Active](images/3ESetToActive.png)
 
