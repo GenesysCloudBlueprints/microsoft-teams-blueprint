@@ -115,11 +115,11 @@ To enable communication from Genesys Cloud to Microsoft Azure and Microsoft Team
 
 4. For **User Defined (OAuth)** credential type, add the following five fields, enter the required values, and then click **OK**:
 
-   * A: Set the client_id to the Application (client) ID from your Azure app.
-   * B: Set the client_secret to the Client Secret from your Azure app.
-   * C: Set the tenant_id to the Directory (tenant) ID from your Azure app.
-   * D: Set the scope to https://graph.microsoft.com/.default.
-   * E: Set the grant_type to client_credentials.
+* A: Set the client_id to the Application (client) ID from your Azure app.
+* B: Set the client_secret to the Client Secret from your Azure app.
+* C: Set the tenant_id to the Directory (tenant) ID from your Azure app.
+* D: Set the scope to https://graph.microsoft.com/.default.
+* E: Set the grant_type to client_credentials.
 
    ![Configure credential fields and values](images/1DFieldsandValues.png "Select credential type and add field names and values")
 
