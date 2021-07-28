@@ -1,6 +1,6 @@
 ---
 title: Set up Microsoft Teams meeting on Genesys Cloud
-author: {author name}
+author: yuri.yeti
 indextype: blueprint
 icon: blueprint
 image: images/6COpenScriptDropdown.png
