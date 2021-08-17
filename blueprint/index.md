@@ -242,9 +242,9 @@ The Microsoft Teams video session URL is sent as an SMS to the customer from Gen
 
 To enable the **Send SMS** button which sends the Microsoft Teams video session URL to the customer, you must import two more data actions.
 * [Import Create Teams video meeting data action](#import-create-teams-video-meeting-data-action "Goes to the Import Create Teams video meeting data action section")
-* [Send the SMS data action](#send-sms-data-action "Goes to the Send the SMS data action section")
+* [Send SMS data action](#send-sms-data-action "Goes to the Send SMS data action section")
 
-### Import the Create Teams video meeting data action
+### Import Create Teams video meeting data action
 The Create Teams Video Meeting data action uses the authenticated token supplied by other data actions to request a new Microsoft Teams video meeting URL.
 
 1. Download the *Create-Teams-Meeting.custom.json* file from the [microsoft-teams-blueprint repo](https://github.com/MyPureCloud/microsoft-teams-blueprint "Opens the GitHub repo") GitHub repository. Save this file in your local desktop to import it into Genesys Cloud.
@@ -257,7 +257,7 @@ The Create Teams Video Meeting data action uses the authenticated token supplied
 
    ![Import the Create Teams video meeting data action](images/4BImportCreateTeamsVideoMeetingDataAction.png "Select the Create Teams meeting JSON file to import it")
 
-### Send the SMS data action
+### Send SMS data action
 This data action creates and sends an SMS message that contains the Microsoft Teams video meeting URL to the customer. The Create Teams Video Meeting data action that you configured creates the URL.
 
 1. Download the *Send-SMS.custom.json* file from the [microsoft-teams-blueprint repo](https://github.com/MyPureCloud/microsoft-teams-blueprint "Opens the GitHub repo") GitHub repository. Save this file in your local desktop to import it into Genesys Cloud.
