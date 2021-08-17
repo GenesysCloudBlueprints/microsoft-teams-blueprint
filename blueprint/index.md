@@ -265,7 +265,7 @@ This data action creates and sends an SMS message that contains the Microsoft Te
 
    ![Import the data action](images/4AImportDataActions.png "Import the data action")
 
-3. Select the *Send-SMS.custom.json* file and associate with the [web services data action](#create-a-web-services-data-actions-integration) that you have created and click **Import Action**.
+3. Select the *Send-SMS.custom.json* file and associate with the web services data action you created in the [Add a web services data actions integration](#add-a-web-services-data-actions-integration "Goes to the Add a web services data actions integration section") section and click **Import Action**.
 
    ![Import the Send the SMS data action](images/5BImportSendSMSDataAction.png "Import the SMS data action")
 
