@@ -253,7 +253,7 @@ The Create Teams Video Meeting data action uses the authenticated token supplied
 
    ![Import the data action](images/4AImportDataActions.png "Import the data action")
 
-3. Select the *Create-Teams-Meeting.custom.json* file and associate with the [web services data action](#create-a-web-services-data-actions-integration "Goes to the Web Service data actions section") that you have created and click **Import Action**.
+3. Select the *Create-Teams-Meeting.custom.json* file and associate with the web services data action you created in the [Add a web services data actions integration](#add-a-web-services-data-actions-integration "Goes to the Web Service data actions section") section and click **Import Action**.
 
    ![Import the Create Teams video meeting data action](images/4BImportCreateTeamsVideoMeetingDataAction.png "Select the Create Teams meeting JSON file to import it")
 
