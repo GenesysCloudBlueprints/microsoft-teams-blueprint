@@ -58,8 +58,8 @@ To enable an agent to use Microsoft Teams meeting from their Genesys Cloud agent
 * [Create an OAuth client for use with the Genesys Cloud data action integration](#create-an-oauth-client-for-use-with-the-genesys-cloud-data-action-integration "Goes to the Create an OAuth client for use with the Genesys Cloud data action integration section")
 * [Add a Genesys Cloud data actions integration](#add-a-genesys-cloud-data-actions-integration "Goes to the Add a Genesys Cloud data actions integration section")
 * [Load the supporting data actions](#load-the-supporting-data-actions "Goes to the Load the supporting data actions section")
-* [Import the Create Teams video meeting data action](#import-the-create-teams-video-meeting-data-action "Goes to the Import the Create Teams video meeting data action section")
-* [Send the SMS data action](#send-the-sms-data-action "Goes to the Send the SMS data action section")
+* [Import Create Teams video meeting data action](#import-create-teams-video-meeting-data-action "Goes to the Import Create Teams video meeting data action section")
+* [Send SMS data action](#send-sms-data-action "Goes to the Send SMS data action section")
 * [Import and publish the script](#import-and-publish-the-script "Goes to the Import and publish the script section")
 * [Test the deployment](#test-the-deployment "Goes to the Test the deployment section")
 * [Additional resources](#additional-resources "Goes to the Additional resources section")
@@ -194,9 +194,9 @@ The Microsoft Teams video session URL is sent as an SMS to the customer from Gen
 
 To enable the **Send SMS** button which sends the Microsoft Teams video session URL to the customer, you must import two more data actions.
 * [Import Create Teams video meeting data action](#import-create-teams-video-meeting-data-action "Goes to the Import Create Teams video meeting data action section")
-* [Send the SMS data action](#send-sms-data-action "Goes to the Send the SMS data action section")
+* [Send SMS data action](#send-sms-data-action "Goes to the Send SMS data action section")
 
-### Import the Create Teams video meeting data action
+### Import Create Teams video meeting data action
 The Create Teams Video Meeting data action uses the authenticated token supplied by other data actions to request a new Microsoft Teams video meeting URL.
 
 1. Download the *Create-Teams-Meeting.custom.json* file from the [microsoft-teams-blueprint repo](https://github.com/MyPureCloud/microsoft-teams-blueprint "Opens the GitHub repo") GitHub repository. Save this file in your local desktop to import it into Genesys Cloud.
@@ -205,11 +205,11 @@ The Create Teams Video Meeting data action uses the authenticated token supplied
 
    ![Import the data action](images/4AImportDataActions.png "Import the data action")
 
-3. Select the *Create-Teams-Meeting.custom.json* file and associate with the [web services data action](#create-a-web-services-data-actions-integration "Goes to the Web Service data actions section") that you have created and click **Import Action**.
+3. Select the *Create-Teams-Meeting.custom.json* file and associate with the web services data action you created in the [Add a web services data actions integration](#add-a-web-services-data-actions-integration "Goes to the Add a web services data actions integration section") section and click **Import Action**.
 
    ![Import the Create Teams video meeting data action](images/4BImportCreateTeamsVideoMeetingDataAction.png "Select the Create Teams meeting JSON file to import it")
 
-### Send the SMS data action
+### Send SMS data action
 This data action creates and sends an SMS message that contains the Microsoft Teams video meeting URL to the customer. The Create Teams Video Meeting data action that you configured creates the URL.
 
 1. Download the *Send-SMS.custom.json* file from the [microsoft-teams-blueprint repo](https://github.com/MyPureCloud/microsoft-teams-blueprint "Opens the GitHub repo") GitHub repository. Save this file in your local desktop to import it into Genesys Cloud.
@@ -217,7 +217,7 @@ This data action creates and sends an SMS message that contains the Microsoft Te
 
    ![Import the data action](images/4AImportDataActions.png "Import the data action")
 
-3. Select the *Send-SMS.custom.json* file and associate with the [web services data action](#create-a-web-services-data-actions-integration) that you have created and click **Import Action**.
+3. Select the *Send-SMS.custom.json* file and associate with the web services data action you created in the [Add a web services data actions integration](#add-a-web-services-data-actions-integration "Goes to the Add a web services data actions integration section") section and click **Import Action**.
 
    ![Import the Send the SMS data action](images/5BImportSendSMSDataAction.png "Import the SMS data action")
 
