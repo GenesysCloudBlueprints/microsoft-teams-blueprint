@@ -14,14 +14,15 @@ The following illustration shows the meeting scheduling solution from an agentâ€
 
 ![Microsoft Teams agent view](images/msteams-workflow.png "Meeting scheduling solution to use Microsoft Teams from an agent's point of view")
 
-The following shows the end to end customer and agent experience this blueprint enables.
+The end to end customer and agent experience is shown in the following illustration.
 
-![Overview](images/TeamsVideoSMSBlueprint.gif "Overview")
+![Overview](images/teamsvideo_gif.gif "Overview")
 
 To enable an agent to use Microsoft Teams meeting from their Genesys Cloud agent UI, you use several public APIs that are available from Genesys Cloud and Microsoft Graph. The following illustration shows the API calls between Genesys Cloud and Microsoft 365.
 
 ![Microsoft Teams integration](images/microsoft-teams-architect.png "The API calls between Genesys Cloud and Microsoft Graph API")
 
+## Contents
 * [Solution components](#solution-components "Goes to the Solution components section")
 * [Prerequisites](#prerequisites "Goes to the Prerequisites section")
 * [Implementation steps](#implementation-steps "Goes to the Implementation steps section")
@@ -52,7 +53,7 @@ To enable an agent to use Microsoft Teams meeting from their Genesys Cloud agent
 
 ### Microsoft account
 
-* An enterprise Azure Account is required.  Personal Azure accounts do not support the OAuth grant type of client_credentials used in this blueprint.
+* An enterprise Azure account. Personal Azure accounts do not support the OAuth grant type of client credentials in Genesys Cloud.
 * Admininstrator-level role for Microsoft Azure Active Directory to set up authorization and grant permissions for Genesys Cloud.
 * Microsoft Teams license for agents.
 
@@ -73,7 +74,7 @@ To enable an agent to use Microsoft Teams meeting from their Genesys Cloud agent
 To enable the Genesys Cloud instance to authenticate and retrieve user information from the Graph API for Microsoft Teams, register your custom application in Azure.
 
 1. Log in to the Azure portal.
-2. Navigate to **App registrations** and click **New registration**.
+2. Navigate to **Manage** > **App registrations** and click **New registration**.
 
    ![New registration for an Azure app](images/0ACreateNewAzureAppRegistration.png "Azure portal for new registration")
 
@@ -92,36 +93,36 @@ To enable the Genesys Cloud instance to authenticate and retrieve user informati
 6. Copy the client secret value for later use.
 
    :::primary
-   **Note:** You cannot view or retrieve the client secret value later.
+   **Note:** You can't view or retrieve the client secret value later.
    :::
 
    ![Copy and save the client secrets](images/0ECopyClientSecret_08_21.png "Copy and save the client secrets")
 
-7. Navigate to **API Permissions** and click **Add a permission**.
+7. Navigate to **Manage** > **API Permissions**. Under Configured permissions, select **Add a permission**.
 
    ![Microsoft Azure permissions](images/addApiPermissions.png "Add API Permissions")
 
-8. Click **Microsoft Graph**.
+8. Select the **Microsoft APIs** tab, and then select **Microsoft Graph**.
 
    ![Microsoft Graph](images/selectGraphApi.png "Click Microsoft Graph")
 
-9. Click **Application Permissions**.
+9. Select **Application permissions**.
 
     ![Application Permission](images/selectApplicationPermissions.png "Click Application Permissions")
 
-10. Search for **Calendars**, expand the **Calendars** section, select the **Calendars.ReadWrite** permission, click **Add permissions**.
+10. Under the **Select permissions** section, search for Calendars in the Search field. In the search result, expand **Calendars** and select the **Calendars.ReadWrite** permission. Click **Add permissions**.
 
     ![Calendar Permissions](images/selectCalendarsReadWritePermission.png "Click Application Permissions")
 
-11. Click **Grant Admin Consent**.
+11. Under Configured permissions, select **Grant admin consent for MS Teams Demo**.
 
     ![Grant Admin Consent](images/grantAdminConsent.png "Click Grant Admin Consent")    
 
-12. Click **Yes** in the confirmation modal.
+12. To grant consent for the requested permission, click **Yes**.
 
     ![Confirm Grant Admin Consent](images/confirmAdminConsent.png "Confirm Grant Admin Consent")    
 
-13. Admin consent granted.
+13. View the admin consent granted for Microsoft Graph.
 
     ![Admin Consent Granted](images/adminConsentGranted.png "Admin Consent Granted")    
 
@@ -161,7 +162,7 @@ To enable communication from Genesys Cloud to Microsoft Azure and Microsoft Team
    ![Custom Auth data action associated with web services data actions integration](images/1ECustomAuthDataAction.png "Open the custom auth data action associated with web services data action")
 
    1. At the bottom of the Custom Auth data action page, click **Viewing** to change the status of the data action from **Published** to **Draft**.
-   2. Download the auth data action file *Office-365-Auth.customAuth.json* from the [microsoft-teams-blueprint](https://github.com/MyPureCloud/microsoft-teams-blueprint "Opens the GitHub repo") GitHub repository. Save this file to your local desktop to import it into Genesys Cloud.
+   2. Download the auth data action file `Office-365-Auth.customAuth.json` from the [microsoft-teams-blueprint](https://github.com/MyPureCloud/microsoft-teams-blueprint "Opens the GitHub repo") GitHub repository. Save this file to your local desktop to import it into Genesys Cloud.
    3. Click **Import** and browse to select the downloaded file.
 
       ![Import authentication data action file](images/1FOpenCustomAuthDataAction.png "Import the custom authentication data action file")
@@ -175,25 +176,25 @@ To enable communication from Genesys Cloud to Microsoft Azure and Microsoft Team
       **Note:** Click **Yes** in the Publish Action window to publish the data action. The import action modifies only the data action configuration and not the data action contract.
       :::
 
-6.  Return to the web services data action integration and verify that the data action is in **Active** status.
+   6.  Return to the web services data action integration and verify that the data action is in **Active** status.
 
 ### Create a custom role for use with Genesys Cloud OAuth client
 
-1. Navigate to **Roles/Permissions**.
+1. Navigate to **Roles/Permissions** and click **Add Role**.
 
    ![Create Custom Role](images/createRole.png "Create Custom Role")
 
-2. Type a **Name** for your custom role.
+2. Enter a name for your custom role.
 
-  ![Name Custom Role](images/nameCustomRole.png "Name Custom Role")
+   ![Name Custom Role](images/nameCustomRole.png "Name Custom Role")
 
-3. Search and select the **Conversation>message>Create** and **messaging>sms>send** permissions and click **Save** to assign the appropriate permissions to your custom role.
+3. In the **Permissions** tab, search and select the **Conversation > message > Create** and **messaging > sms > send** permissions. Click **Save** to assign the selected permissions to your custom role.
 
-:::primary
-**Note:** Assign this role to your user record before creating the Genesys Cloud OAuth client.  The messaging>sms>send permission requires the "GMA/Portico: Non conversational bi-directional SMS, MMS, Email and RCS messaging" product to be activated in your Genesys Cloud organization.
-:::
+   :::primary
+   **Note:** Assign this role to your user record before creating the Genesys Cloud OAuth client. The **messaging > sms > send** permission requires the "GMA/Portico: Non conversational bi-directional SMS, MMS, Email and RCS" messaging product to be activated in your Genesys Cloud organization.
+   :::
 
-  ![Add Permissions to Custom Role](images/assignPermissionToCustomRole.png "Add Permissions to Custom Role")
+   ![Add Permissions to Custom Role](images/assignPermissionToCustomRole.png "Add Permissions to Custom Role")
 
 
 ### Create an OAuth client for use with the Genesys Cloud data action integration
@@ -206,7 +207,7 @@ To enable Genesys Cloud data action make requests to an organization, you must c
 2. Enter a name for the OAuth client and select **Client Credentials** as the Grant Type. Click the **Roles** tab and assign the roles for the OAuth client.
 
    :::primary
-   **Note:** Select a custom role that includes the permission Messaging > Sms > Send. No default role includes this permission. To create a custom role, see the Custom roles information in [Roles and permissions overview](https://help.mypurecloud.com/?p=24360 "Opens the Roles and Permission overview article").
+   **Note:** Select a custom role that includes the permission **messaging > sms > send**. No default role includes this permission. To create a custom role, see the Custom roles information in [Roles and permissions overview](https://help.mypurecloud.com/?p=24360 "Opens the Roles and Permission overview article").
    :::
 
    ![Set up OAuth client](images/2BOAuthClientSetup.png "Select custom role and the grant type for client details")
@@ -240,45 +241,45 @@ The Microsoft Teams video session URL is sent as an SMS to the customer from Gen
 
 ### Load the supporting data actions
 
-To enable the **Send SMS** button which sends the Microsoft Teams video session URL to the customer, you must import two more data actions.
+To enable the **Send SMS** button that sends the Microsoft Teams video session URL to the customer, you must import two more data actions.
 * [Import Create Teams video meeting data action](#import-create-teams-video-meeting-data-action "Goes to the Import Create Teams video meeting data action section")
 * [Send SMS data action](#send-sms-data-action "Goes to the Send SMS data action section")
 
 ### Import Create Teams video meeting data action
 The Create Teams Video Meeting data action uses the authenticated token supplied by other data actions to request a new Microsoft Teams video meeting URL.
 
-1. Download the *Create-Teams-Meeting.custom.json* file from the [microsoft-teams-blueprint repo](https://github.com/MyPureCloud/microsoft-teams-blueprint "Opens the GitHub repo") GitHub repository. Save this file in your local desktop to import it into Genesys Cloud.
+1. Download the `Create-Teams-Meeting.custom.json` file from the [microsoft-teams-blueprint repo](https://github.com/MyPureCloud/microsoft-teams-blueprint "Opens the GitHub repo") GitHub repository. Save this file in your local desktop to import it into Genesys Cloud.
 
 2. Navigate to **Integrations** > **Actions** and click **Import**.
 
    ![Import the data action](images/4AImportDataActions.png "Import the data action")
 
-3. Select the *Create-Teams-Meeting.custom.json* file and associate with the web services data action you created in the [Add a web services data actions integration](#add-a-web-services-data-actions-integration "Goes to the Add a web services data actions integration section") section and click **Import Action**.
+3. Select the `Create-Teams-Meeting.custom.json` file and associate with the web services data action that you created in the [Add a web services data actions integration](#add-a-web-services-data-actions-integration "Goes to the Add a web services data actions integration section") section and click **Import Action**.
 
    ![Import the Create Teams video meeting data action](images/4BImportCreateTeamsVideoMeetingDataAction.png "Select the Create Teams meeting JSON file to import it")
 
 ### Send SMS data action
 This data action creates and sends an SMS message that contains the Microsoft Teams video meeting URL to the customer. The Create Teams Video Meeting data action that you configured creates the URL.
 
-1. Download the *Send-SMS.custom.json* file from the [microsoft-teams-blueprint repo](https://github.com/MyPureCloud/microsoft-teams-blueprint "Opens the GitHub repo") GitHub repository. Save this file in your local desktop to import it into Genesys Cloud.
+1. Download the `Send-SMS.custom.json` file from the [microsoft-teams-blueprint repo](https://github.com/MyPureCloud/microsoft-teams-blueprint "Opens the GitHub repo") GitHub repository. Save this file in your local desktop to import it into Genesys Cloud.
 2. Navigate to **Integrations** > **Actions** and click **Import**.
 
    ![Import the data action](images/4AImportDataActions.png "Import the data action")
 
-3. Select the *Send-SMS.custom.json* file and associate with the web services data action you created in the [Add a web services data actions integration](#add-a-web-services-data-actions-integration "Goes to the Add a web services data actions integration section") section and click **Import Action**.
+3. Select the `Send-SMS.custom.json` file and associate with the web services data action you created in the [Add a web services data actions integration](#add-a-web-services-data-actions-integration "Goes to the Add a web services data actions integration section") section and click **Import Action**.
 
    ![Import the Send the SMS data action](images/5BImportSendSMSDataAction.png "Import the SMS data action")
 
 ### Import and publish the script
-You need to import the script *Send-SMS-with-Teams-Video-URL.script* that references the created data actions. The script generates the **Escalate to Teams** button for agents during an active interaction with the customer. It also sends an SMS that contains the Microsoft Teams video URL to the customer.
+Import the `Send-SMS-with-Teams-Video-URL.script` file that references the created data actions. The script creates the **Escalate to Teams** button for agents during an active interaction with the customer. When the agent clicks the button, it sends an SMS that contains the Microsoft Teams video URL to the customer.
 
-1. Download the *Send-SMS-with-Teams-Video-URL.script* file from the [microsoft-teams-blueprint repo](https://github.com/MyPureCloud/microsoft-teams-blueprint "Opens the GitHub repo") GitHub repository. Save this file to your local desktop to import it into Genesys Cloud.  
+1. Download the `Send-SMS-with-Teams-Video-URL.script` file from the [microsoft-teams-blueprint repo](https://github.com/MyPureCloud/microsoft-teams-blueprint "Opens the GitHub repo") GitHub repository. Save this file to your local desktop to import it into Genesys Cloud.  
 
 2. Navigate to **Admin** > **Contact Center** > **Scripts** and click **Import**.
 
    ![Import the script](images/6AImportScript.png "Import the script")
 
-3. Select the downloaded *Send-SMS-with-Teams-Video-URL.script* file.
+3. Select the downloaded `Send-SMS-with-Teams-Video-URL.script` file.
 
    ![Import the send SMS script](images/6BImportSendSMSScript.png "Import the SMS script")
 
@@ -286,110 +287,105 @@ You need to import the script *Send-SMS-with-Teams-Video-URL.script* that refere
 
    ![Open the Script menu](images/6COpenScriptDropdown.png "Open the Script menu")
 
-5. Click the **Actions** icon and then click **Escalate to Teams**
+5. Click the **Actions** icon and then select **Escalate to Teams**.
 
-  ![Click Script Actions](images/clickScriptActions.png "Click Script Actions")
+   ![Click Script Actions](images/clickScriptActions.png "Click Script Actions")
 
-6. Expand the First Data Action
+6. Expand the first data action **Data Actions.Execute Data Action**, that creates the Teams meeting.
 
    ![Expand the First Data Action](images/expandFirstDataAction.png "Expand the First Data Action")
 
-7. From the **Category** drop menu, select the category of your "Create Teams Meeting" data action.  From the **Data Action** drop menu, select your "Create Teams Meeting" data action.
+7. From the Category list, select the Teams meeting web services data action. From the Data Action list, select the Teams meeting data action.
 
-  ![Expand the First Data Action](images/mapFirstDataAction.png "Expand the First Data Action")
+   ![Expand the First Data Action](images/mapFirstDataAction.png "Expand the First Data Action")
 
-8. Expand the input variables for the First Data Action
+8. Expand the input variables for the first data action and enter the user input variable. The variable can be either an agent's Teams account or the Teams account that must be used regardless of which agent is on the interaction.
+   :::primary
+   **Note:** When you enter an agent's Teams account, the agent's Genesys Cloud email address must match their Teams email address. When you define a general Teams account, it can be either an email address or an object ID of an agent in the Azure Activity Directory.
+   ::: 
 
-  ![Expand Input Variables](images/mapFirstDataActionExpandInputVariables.png "Expand Input Variables")
+      ![Map First Data Action Input Variable](images/mapFirstDataActionDefineUserInputVariable.png "Map First Data Action Input Variable")
 
-9. Type the desired value in the **user** input variable.
+9. Define the static values for the input variables, `startTime`, `endTime`, and `timeZone`. 
 
-  :::primary
-  **Note:** The variable value in the example below will create a Teams meeting through the agent's Teams account.  For this to work, the agent's Genesys Cloud email address must match their Teams email address.  If you'd like to use the same Teams account to create the Teams meeting regardless of which agent is on the interaction, you can define a static value here.  It can be either the email address or object ID of a person in the Azure Activity Directory where your app is registered.
-  :::
+   :::primary
+   **Note:** You can enter the same value for `startTime` and `endTime` parameters and the timestamp can be in the past. Also, define your own timestamp format. The example shows the value to create the ISO-8601 format timestamp. 
+   :::
 
-  ![Map First Data Action Input Variable](images/mapFirstDataActionDefineUserInputVariable.png "Map First Data Action Input Variable")
+   ![Define Static Input Variables](images/mapFirstDataActionDefineInputVariables.png "Define Static Input Variables")
 
-10. Define static values for the remaining input variables.
+10. Expand the second data action that sends the SMS.
 
-  :::primary
-  **Note:** Using the values in this example will create ISO-8601 formatted timestamps.  The startTime and endTime parameters can be the same and it can occur in the past.  If you would like to define your own static timestamps for these variables, you are welcome to do so.
-  :::
+    ![Expand the second data action.](images/expandSecondDataAction.png "Expand the second data action.")
 
-  ![Define Static Input Variables](images/mapFirstDataActionDefineInputVariables.png "Define Static Input Variables")
+11. From the Category list, select the category of the Send SMS data action.  From the Data Action list, select the Send SMS data action.
 
-11. Expand the second data action.
+    ![Map Second Data Action](images/mapSecondDataAction.png "Map Second Data Action")
 
-   ![Expand the second data action.](images/expandSecondDataAction.png "Expand the second data action.")
+12. Expand the input variables for the second data action.
 
-12. From the **Category** drop menu, select the category of your "Send SMS" data action.  From the **Data Action** drop menu, select your "Send SMS" data action.
+13. In the **fromAddress** input variable, type one of your SMS numbers bought from the Genesys Cloud organization.
 
- ![Map Second Data Action](images/mapSecondDataAction.png "Map Second Data Action")
+      :::primary
+      **Note:** See [Purchase SMS long code numbers](https://help.mypurecloud.com/articles/purchase-sms-long-code-numbers/ "Opens the Purchase SMS long code numbers article") in the Genesys Cloud Resource Center for detailed steps about purchasing an SMS number. You must enter the SMS number in +11234567890 format.
+      :::
 
-13. Expand the input variables for the Second Data Action
+    ![Define From Address Input Variable](images/mapSecondDataActionFromAddressVariable.png "Define From Address Input Variable")
 
-14. Type one of your purchased SMS Numbers from your Genesys Cloud organization in the **fromAddress** input variable.
+14. Enter the values for the remaining input variables of the second data action as shown in the example.
 
- :::primary
- **Note:** See additional resource below for detailed steps for purchasing an SMS number.  Phone must be typed in +11234567890 format.
- :::
+    ![Map Second Data Action Input Variables](images/mapSecondDataActionVariables.png "Map Second Data Action Input Variables")
 
- ![Define From Address Input Variable](images/mapSecondDataActionFromAddressVariable.png "Define From Address Input Variable")
+15. Under the Custom Action Name section, click **Save**.
 
-15. Confirm the remaining input variables of the second data action match the example below.
+    ![Save Custom Action](images/saveScriptCustomAction.png "Save Custom Action")
 
- ![Map Second Data Action Input Variables](images/mapSecondDataActionVariables.png "Map Second Data Action Input Variables")
+16. In the Script menu, click **Save**.
 
-16. Below the Custom Action Name, click **Save**.
+    ![Save the script](images/saveScript.png "Save the script")
 
-  ![Save Custom Action](images/saveScriptCustomAction.png "Save Custom Action")
+17. In the Script menu, click **Publish**.
 
-17. In the Script menu, click **Save**.
+    ![Publish the script](images/6DPublishScript.png "Publish the script")
 
-   ![Save the script](images/saveScript.png "Save the script")
+18. Navigate to **Admin** > **Contact Center** > **Queues** and select the queue that you want to associate with this script.
 
-18. In the Script menu, click **Publish**.
-
-   ![Publish the script](images/6DPublishScript.png "Publish the script")
-
-19. Navigate to **Admin** > **Contact Center** > **Queues** and select the queue you'd like to associate with this script.
-
-20. Click the **Voice** tab, select the "Send-SMS-with-Teams-Video-URL" script from the **Default Script** field.
+19. In the **Voice** tab, select the `Send-SMS-with-Teams-Video-URL` script from the **Default Script** list.
 
     ![Select Default Script](images/selectDefaultScriptForQueue.png "Select the Default Script")
 
-## Test the deployment
-You can test the Create Teams video meeting URL data action within the data action.
+20. Click **Save & Continue**.
+
+### Test the deployment
+Test the Create Teams video meeting URL data action within the data action.
 
 1. Navigate to **Admin** > **Integrations** > **Actions** and select the Create Teams Video Meeting data action.
 
 
-2. Navigate to **Setup** > **Test**, enter your user, startTime, endTime and timeZone, and then click **Run Action**.
+2. Navigate to **Setup** > **Test**, enter the **user**, **startTime**, **endTime** and **timeZone**, and then click **Run Action**.
 
     :::primary
-    **Note:** The startTime and endTime parameters must be in ISO-8601 format. The user parameter can be the Teams user's ActiveDirect Object ID or the Teams user's email address.
+    **Note:** The **startTime** and **endTime** parameters must be in ISO-8601 format. The **user** parameter can be either the agent's Azure Active Directory Object ID or the agent's Teams email address.
     :::
 
    ![Test the Create Teams video meeting data action](images/7TestCreateTeamsVideoMeetingURLDataAction.png "Test the deployment")
 
-You can test the Send SMS data action within the data action.
+Test the Send SMS data action within the data action.
 
 1. Navigate to **Admin** > **Integrations** > **Actions** and select the Send SMS data action.
-
-
-2. Navigate to **Setup** > **Test**, enter your user, startTime, endTime and timeZone, and then click **Run Action**.
+2. Navigate to **Setup** > **Test**, and enter the **fromAddress** and **toAddress**.
 
    :::primary
-   **Note:** The fromAddress parameter must be one of the purchased SMS Numbers within your Genesys Cloud organization.  See additional resource below for detailed steps for purchasing an SMS number.  The toAddressMessengerType must be "sms".
+   **Note:** Use one of the purchased SMS numbers within your Genesys Cloud org for the **fromAddress** parameter.
    :::
+3. Enter **sms** for **toAddressMessengerType** and click **Run Action**.
 
-  ![Test the Send SMS data action](images/testSendSMSDataAction.png "Test the Send SMS deployment")
-
+   ![Test the Send SMS data action](images/testSendSMSDataAction.png "Test the Send SMS deployment")
 
 ## Additional resources
 
 - [Create onlineMeeting](https://docs.microsoft.com/en-us/graph/api/application-post-onlinemeetings?view=graph-rest-1.0&tabs=javascript "Opens the Microsoft graph documentation") in the Microsoft Graph API Reference
-- [Purchase SMS long code numbers](https://help.mypurecloud.com/articles/purchase-sms-long-code-numbers/) in Genesys Cloud Help
+- [Purchase SMS long code numbers](https://help.mypurecloud.com/articles/purchase-sms-long-code-numbers/) in the Genesys Cloud Resource Center
 - [About Scripting](https://help.mypurecloud.com/?p=54284 "Opens the Scripting overview article") in the Genesys Cloud Resource Center
 - [Agentless SMS Notifications](https://developer.mypurecloud.com/api/tutorials/agentless-sms-notifications/index.html?language=java&step=1 "Opens the SMS tutorial") in the Genesys Cloud Developer Center
 - [Auto Send SMS](https://developer.mypurecloud.com/api/tutorials/sms-sending/index.html?language=nodejs&step=1 "Opens the SMS Sending tutorial") in the Genesys Cloud Developer Center
