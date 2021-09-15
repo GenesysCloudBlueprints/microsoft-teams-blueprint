@@ -188,10 +188,10 @@ To enable communication from Genesys Cloud to Microsoft Azure and Microsoft Team
 
    ![Name Custom Role](images/nameCustomRole.png "Name Custom Role")
 
-3. In the **Permissions** tab, search and select the **Conversation > message > Create** and **messaging > sms > send** permissions. Click **Save** to assign the selected permissions to your custom role.
+3. To assign the appropriate permissions to your custom role, search and select the **Conversation > message > Create** and **messaging > sms > send** permissions in the **Permissions** tab. Then, click **Save**.
 
    :::primary
-   **Note:** Assign this role to your user record before creating the Genesys Cloud OAuth client. The **messaging > sms > send** permission requires the "GMA/Portico: Non conversational bi-directional SMS, MMS, Email and RCS" messaging product to be activated in your Genesys Cloud organization.
+   **Note:** Assign this role to your user record before creating the Genesys Cloud OAuth client. The **messaging > sms > send** permission requires the **GMA/Portico: Non conversational bi-directional SMS, MMS, Email and RCS messaging** product to be activated in your Genesys Cloud organization.
    :::
 
    ![Add Permissions to Custom Role](images/assignPermissionToCustomRole.png "Add Permissions to Custom Role")
@@ -291,7 +291,7 @@ Import the `Send-SMS-with-Teams-Video-URL.script` file that references the creat
 
    ![Click Script Actions](images/clickScriptActions.png "Click Script Actions")
 
-6. Expand the first data action **Data Actions.Execute Data Action**, that creates the Teams meeting.
+6. Expand the first data action called **Data Actions.Execute Data Action**. This data action creates the Teams meeting.
 
    ![Expand the First Data Action](images/expandFirstDataAction.png "Expand the First Data Action")
 
@@ -309,25 +309,25 @@ Import the `Send-SMS-with-Teams-Video-URL.script` file that references the creat
 9. Define the static values for the input variables, `startTime`, `endTime`, and `timeZone`. 
 
    :::primary
-   **Note:** You can enter the same value for `startTime` and `endTime` parameters and the timestamp can be in the past. Also, define your own timestamp format. The example shows the value to create the ISO-8601 format timestamp. 
+   **Note:** You can enter the same value for `startTime` and `endTime` parameters and the timestamp can be in the past. Also, you can define your own timestamp format. The example shows the value to create the ISO-8601 format timestamp. 
    :::
 
    ![Define Static Input Variables](images/mapFirstDataActionDefineInputVariables.png "Define Static Input Variables")
 
-10. Expand the second data action that sends the SMS.
+10. Expand the second data action that sends the SMS message.
 
     ![Expand the second data action.](images/expandSecondDataAction.png "Expand the second data action.")
 
-11. From the Category list, select the category of the Send SMS data action.  From the Data Action list, select the Send SMS data action.
+11. From the **Category** list, select the category of the Send SMS data action.  From the **Data Action** list, select the Send SMS data action.
 
     ![Map Second Data Action](images/mapSecondDataAction.png "Map Second Data Action")
 
 12. Expand the input variables for the second data action.
 
-13. In the **fromAddress** input variable, type one of your SMS numbers bought from the Genesys Cloud organization.
+13. In the **fromAddress** input variable, type one of the SMS numbers that was purchased for your Genesys Cloud organization.
 
       :::primary
-      **Note:** See [Purchase SMS long code numbers](https://help.mypurecloud.com/articles/purchase-sms-long-code-numbers/ "Opens the Purchase SMS long code numbers article") in the Genesys Cloud Resource Center for detailed steps about purchasing an SMS number. You must enter the SMS number in +11234567890 format.
+      **Note:** For more information about purchasing SMS numbers, see [Purchase SMS long code numbers](https://help.mypurecloud.com/articles/purchase-sms-long-code-numbers/ "Opens the Purchase SMS long code numbers article") in the Genesys Cloud Resource Center. You must enter the SMS number in +11234567890 format.
       :::
 
     ![Define From Address Input Variable](images/mapSecondDataActionFromAddressVariable.png "Define From Address Input Variable")
@@ -336,15 +336,15 @@ Import the `Send-SMS-with-Teams-Video-URL.script` file that references the creat
 
     ![Map Second Data Action Input Variables](images/mapSecondDataActionVariables.png "Map Second Data Action Input Variables")
 
-15. Under the Custom Action Name section, click **Save**.
+15. Under **Custom Action Name**, click **Save**.
 
     ![Save Custom Action](images/saveScriptCustomAction.png "Save Custom Action")
 
-16. In the Script menu, click **Save**.
+16. On the Script menu, click **Save**.
 
     ![Save the script](images/saveScript.png "Save the script")
 
-17. In the Script menu, click **Publish**.
+17. On the Script menu, click **Publish**.
 
     ![Publish the script](images/6DPublishScript.png "Publish the script")
 
