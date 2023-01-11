@@ -188,10 +188,10 @@ To enable communication from Genesys Cloud to Microsoft Azure and Microsoft Team
 
    ![Name Custom Role](images/nameCustomRole.png "Name Custom Role")
 
-3. To assign the appropriate permissions to your custom role, search and select the **Conversation > message > Create** and **messaging > sms > send** permissions in the **Permissions** tab. Then, click **Save**.
+3. To assign the appropriate permissions to your custom role, search and select the **Conversation > message > Create** and **messaging > sms > All Permissions** permissions in the **Permissions** tab. Then, click **Save**.
 
    :::primary
-   **Note:** Assign this role to your user record before creating the Genesys Cloud OAuth client. The **messaging > sms > send** permission requires the **GMA/Portico: Non conversational bi-directional SMS, MMS, Email and RCS messaging** product to be activated in your Genesys Cloud organization.
+   **Note:** Assign this role to your user record before creating the Genesys Cloud OAuth client. The **messaging > sms > All Permissions** permission requires the **Messaging: Messaging & SMS Functionality** product to be activated in your Genesys Cloud organization.
    :::
 
    ![Add Permissions to Custom Role](images/assignPermissionToCustomRole.png "Add Permissions to Custom Role")
@@ -207,7 +207,7 @@ To enable Genesys Cloud data action make requests to an organization, you must c
 2. Enter a name for the OAuth client and select **Client Credentials** as the Grant Type. Click the **Roles** tab and assign the roles for the OAuth client.
 
    :::primary
-   **Note:** Select a custom role that includes the permission **messaging > sms > send**. No default role includes this permission. To create a custom role, see the Custom roles information in [Roles and permissions overview](https://help.mypurecloud.com/?p=24360 "Opens the Roles and Permission overview article").
+   **Note:** Select a custom role that includes the permission **messaging > sms > All Permissions**. No default role includes this permission. To create a custom role, see the Custom roles information in [Roles and permissions overview](https://help.mypurecloud.com/?p=24360 "Opens the Roles and Permission overview article").
    :::
 
    ![Set up OAuth client](images/2BOAuthClientSetup.png "Select custom role and the grant type for client details")
@@ -302,14 +302,14 @@ Import the `Send-SMS-with-Teams-Video-URL.script` file that references the creat
 8. Expand the input variables for the first data action and enter the user input variable. The variable can be either an agent's Teams account or the Teams account that must be used regardless of which agent is on the interaction.
    :::primary
    **Note:** When you enter an agent's Teams account, the agent's Genesys Cloud email address must match their Teams email address. When you define a general Teams account, it can be either an email address or an object ID of an agent in the Azure Activity Directory.
-   ::: 
+   :::
 
       ![Map First Data Action Input Variable](images/mapFirstDataActionDefineUserInputVariable.png "Map First Data Action Input Variable")
 
-9. Define the static values for the input variables, `startTime`, `endTime`, and `timeZone`. 
+9. Define the static values for the input variables, `startTime`, `endTime`, and `timeZone`.
 
    :::primary
-   **Note:** You can enter the same value for `startTime` and `endTime` parameters and the timestamp can be in the past. Also, you can define your own timestamp format. The example shows the value to create the ISO-8601 format timestamp. 
+   **Note:** You can enter the same value for `startTime` and `endTime` parameters and the timestamp can be in the past. Also, you can define your own timestamp format. The example shows the value to create the ISO-8601 format timestamp.
    :::
 
    ![Define Static Input Variables](images/mapFirstDataActionDefineInputVariables.png "Define Static Input Variables")
